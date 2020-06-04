@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>webassembly example</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    .context-menu {
+      position: absolute;
+      margin: 0;
+      list-style: none;
+      padding: 5px 0;
+      width: 150px;
+    }
+
+    .button {
+      width: 100%;
+      text-align: center;
+      border: 1px solid #505050;
+      background: #454545;
+      color: #f5f5f5;
+      font-weight: bold;
+      text-transform: uppercase;
+      padding: 5px 0;
+      transition: background 0.5s;
+      cursor: pointer;
+    }
+
+    .button:hover {
+      background: #656565;
+    }
+  </style>
+</head>
+<body>
+  <ul id="canvasContext" class="context-menu" style="display: none">
+    <li>
+      <button id="addNode" class="button" type="button">Добавить ноду</button>
+    </li>
+  </ul>
+
+  <ul id="circleContext" class="context-menu" style="display: none">
+    <li>
+      <button id="removeNode" class="button" type="button">Удалить ноду</button>
+      <button id="addLink" class="button" type="button">Добавить связь</button>
+    </li>
+  </ul>
+
+  <ul id="linkContext" class="context-menu" style="display: none">
+    <li>
+      <button id="removeLink" class="button" type="button">Удалить связь</button>
+    </li>
+  </ul>
+
+  <canvas id="canvas"></canvas>
+  <script src="./canvas.js"></script>
+</body>
+</html>
