@@ -1,6 +1,8 @@
-#include <emscripten/bind.h>
-
-using namespace emscripten;
+#include <map>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <iterator>
 
 std::vector<std::string> get_final_path(std::map<std::string, std::string> parents, std::string lastNode)
 {
@@ -82,22 +84,34 @@ std::map<std::string, std::string> find_path(
   return parents;
 }
 
-std::vector<std::string> dijkstra(
-  std::map<std::string, std::map<std::string, int> > graph,
-  std::map<std::string, int> costs,
-  std::map<std::string, std::string> parents
-)
+std::vector<std::string> start()
 {
+  std::map<std::string, std::map<std::string, int> > graph;
+
+  graph["start"]["a"] = 5;
+  graph["start"]["b"] = 2;
+  graph["a"]["c"] = 4;
+  graph["a"]["d"] = 2;
+  graph["b"]["a"] = 8;
+  graph["b"]["d"] = 7;
+  graph["c"]["d"] = 6;
+  graph["c"]["end"] = 3;
+  graph["d"]["end"] = 1;
+
+  std::map<std::string, int> costs;
+
+  costs["a"] = 5;
+  costs["b"] = 2;
+  costs["c"] = std::numeric_limits<int>::max();
+  costs["d"] = std::numeric_limits<int>::max();
+  costs["end"] = std::numeric_limits<int>::max();
+
+  std::map<std::string, std::string> parents;
+
+  parents["a"] = "start";
+  parents["b"] = "start";
+  parents["end"] = "";
+
   std::map<std::string, std::string> result = find_path(graph, costs, parents);
   return get_final_path(result, "end");
-}
-
-EMSCRIPTEN_BINDINGS(module) {
-  function("dijkstra", &dijkstra);
-
-  // register bindings for std::vector<int> and std::map<int, std::string>.
-  register_vector<std::string>("vector<string>");
-  register_map<std::string, std::string>("map<string, string>");
-  register_map<std::string, int>("map<string, int>");
-  register_map<std::string, std::map<std::string, int>>("map<string, map<string, int>>");
 }
