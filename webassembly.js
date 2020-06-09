@@ -1,7 +1,7 @@
 ;(function (Module) {
   const CPP_INT_INF = 2147483647
   const testData = {
-    start: {
+    o: {
       a: 5,
       b: 2,
     },
@@ -15,10 +15,10 @@
     },
     c: {
       d: 6,
-      end: 3,
+      f: 3,
     },
     d: {
-      end: 1,
+      f: 1,
     },
   }
 
@@ -54,10 +54,11 @@
     nodes.forEach(node => {
       if (struct[startNode][node]) {
         costs.set(node, struct[startNode][node])
-      } else {
+      } else if (node !== startNode) {
         costs.set(node, CPP_INT_INF)
       }
     })
+
     return costs
   }
 
@@ -75,18 +76,23 @@
     return parents
   }
 
-  function main() {
-    const startNode = 'start'
-    const endNode = 'end'
-    const graph = getGraph(testData)
-    const costs = getCosts(testData, startNode)
-    const parents = getParents(testData, startNode, endNode)
+  function findPath(data, startNode, endNode) {
+    const graph = getGraph(data)
+    const costs = getCosts(data, startNode)
+    const parents = getParents(data, startNode, endNode)
 
-    const vector = Module.dijkstra(graph, costs, parents)
+    const vector = Module.dijkstra(graph, costs, parents, endNode)
+    const result = []
 
     for (let i = 0; i < vector.size(); i++) {
-      console.log(vector.get(i))
+      result.push(vector.get(i))
     }
+
+    return result
+  }
+
+  function main() {
+    window.findPath = findPath
   }
 
   window.addEventListener('load', main)

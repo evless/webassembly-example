@@ -33,6 +33,29 @@
     .button:hover {
       background: #656565;
     }
+
+    .form {
+      position: absolute;
+      right: 10;
+      bottom: 10;
+      background: #303030;
+      border-radius: 3px;
+      padding: 5px;
+      width: 150px;
+    }
+
+    .input {
+      width: 48%;
+      margin-bottom: 5px;
+      font-size: 16px;
+    }
+
+    .result {
+      color: #fff;
+      text-align: center;
+      font-weight: bold;
+      padding: 5px;
+    }
   </style>
 </head>
 <body>
@@ -54,6 +77,13 @@
       <button id="removeLink" class="button" type="button">Удалить связь</button>
     </li>
   </ul>
+
+  <div class="form">
+    <div id="result" class="result"></div>
+    <input id="start" type="text" class="input" placeholder="Start" />
+    <input id="end" type="text" class="input" placeholder="End" />
+    <button id="find" class="button" type="button">Найти</button>
+  </div>
 
   <canvas id="canvas"></canvas>
   <script src="./canvas.js"></script>

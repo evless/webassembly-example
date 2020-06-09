@@ -190,6 +190,10 @@
 
     this.rectX = (this.startX + this.endX) / 2 - this.rectSize.width / 2
     this.rectY = (this.startY + this.endY) / 2 - this.rectSize.height / 2
+
+    this.distance = Math.ceil(
+      Math.sqrt(Math.abs(this.startX - this.endX) ** 2 + Math.abs(this.startY - this.endY) ** 2)
+    )
   }
 
   Link.prototype.changeDirection = function () {
@@ -224,10 +228,7 @@
     const x = (this.startX + this.endX) / 2
     const y = (this.startY + this.endY) / 2 - 2
     ctx.fillText(`${this.from}→${this.to}`, x, y)
-    const distance = Math.ceil(
-      Math.sqrt(Math.abs(this.startX - this.endX) ** 2 + Math.abs(this.startY - this.endY) ** 2)
-    )
-    ctx.fillText(`dist: ${distance}`, x, y + 18)
+    ctx.fillText(`dist: ${this.distance}`, x, y + 18)
   }
 
   Link.prototype.drawLine = function (ctx) {
@@ -476,6 +477,10 @@
     const removeNodeButton = document.getElementById('removeNode')
     const addLinkButton = document.getElementById('addLink')
     const removeLinkButton = document.getElementById('removeLink')
+    const findButton = document.getElementById('find')
+    const startInput = document.getElementById('start')
+    const endInput = document.getElementById('end')
+    const resultInput = document.getElementById('result')
     let circles = []
     let links = []
 
@@ -551,10 +556,32 @@
       onToggleContextMenu({ menu: linkContext })
     })
 
+    findButton.addEventListener('click', function() {
+      const data = {}
+
+      links.forEach(link => {
+        const { from, to, distance } = link
+
+        if (!data[from]) {
+          data[from] = {}
+        }
+
+        data[from][to] = distance
+      })
+
+      const start = startInput.value.toUpperCase()
+      const end = endInput.value.toUpperCase()
+      const result = window.findPath(data, start, end)
+
+      resultInput.innerHTML = result.join('→')
+    })
+
     circles.push(
       new Circle(width / 2, height / 2, lettersList[0]),
-      new Circle(width / 3, height / 3, lettersList[1])
+      new Circle(width / 3, height / 3, lettersList[1]),
+      new Circle(width / 1.5, height / 4, lettersList[2]),
     )
+
     links.push(
       new Link(
         { x: circles[0].x, y: circles[0].y },
@@ -563,7 +590,15 @@
         circles[1].name,
         circles[0].color,
         circles[1].color
-      )
+      ),
+      new Link(
+        { x: circles[1].x, y: circles[1].y },
+        { x: circles[2].x, y: circles[2].y },
+        circles[1].name,
+        circles[2].name,
+        circles[1].color,
+        circles[2].color
+      ),
     )
 
     draw(context, circles, links, width, height)

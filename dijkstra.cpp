@@ -68,7 +68,7 @@ std::map<std::string, std::string> find_path(
       int neighbor_cost = neighbor->second;
       int new_cost = cost + neighbor_cost;
 
-      if (costs[neighbor_name] > new_cost)
+      if (costs.find(neighbor_name) != costs.end() && costs[neighbor_name] > new_cost)
       {
         costs[neighbor_name] = new_cost;
         parents[neighbor_name] = node;
@@ -85,11 +85,12 @@ std::map<std::string, std::string> find_path(
 std::vector<std::string> dijkstra(
   std::map<std::string, std::map<std::string, int> > graph,
   std::map<std::string, int> costs,
-  std::map<std::string, std::string> parents
+  std::map<std::string, std::string> parents,
+  std::string lastNode
 )
 {
   std::map<std::string, std::string> result = find_path(graph, costs, parents);
-  return get_final_path(result, "end");
+  return get_final_path(result, lastNode);
 }
 
 EMSCRIPTEN_BINDINGS(module) {
