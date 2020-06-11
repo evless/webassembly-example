@@ -1,144 +1,145 @@
 ;(function () {
+  const radius = 30
   const colors = [
-    'lightsalmon',
-    'salmon',
-    'darksalmon',
-    'lightcoral',
-    'indianred',
-    'crimson',
-    'firebrick',
-    'red',
-    'darkred',
-    'coral',
-    'tomato',
-    'orangered',
-    'gold',
-    'orange',
-    'darkorange',
-    'lightyellow',
-    'lemonchiffon',
-    'lightgoldenrodyellow',
-    'papayawhip',
-    'moccasin',
-    'peachpuff',
-    'palegoldenrod',
-    'khaki',
-    'darkkhaki',
-    'yellow',
-    'lawngreen',
-    'chartreuse',
-    'limegreen',
-    'lime',
-    'forestgreen',
-    'green',
-    'darkgreen',
-    'greenyellow',
-    'yellowgreen',
-    'springgreen',
-    'mediumspringgreen',
-    'lightgreen',
-    'palegreen',
-    'darkseagreen',
-    'mediumseagreen',
-    'seagreen',
-    'olive',
-    'darkolivegreen',
-    'olivedrab',
-    'lightcyan',
-    'cyan',
-    'aqua',
-    'aquamarine',
-    'mediumaquamarine',
-    'paleturquoise',
-    'turquoise',
-    'mediumturquoise',
-    'darkturquoise',
-    'lightseagreen',
-    'cadetblue',
-    'darkcyan',
-    'teal',
-    'powderblue',
-    'lightblue',
-    'lightskyblue',
-    'skyblue',
-    'deepskyblue',
-    'lightsteelblue',
-    'dodgerblue',
-    'cornflowerblue',
-    'steelblue',
-    'royalblue',
-    'blue',
-    'mediumblue',
-    'darkblue',
-    'navy',
-    'midnightblue',
-    'mediumslateblue',
-    'slateblue',
-    'darkslateblue',
-    'lavender',
-    'thistle',
-    'plum',
-    'violet',
-    'orchid',
-    'fuchsia',
-    'magenta',
-    'mediumorchid',
-    'mediumpurple',
-    'blueviolet',
-    'darkviolet',
-    'darkorchid',
-    'darkmagenta',
-    'purple',
-    'indigo',
-    'pink',
-    'lightpink',
-    'hotpink',
-    'deeppink',
-    'palevioletred',
-    'mediumvioletred',
-    'white',
-    'snow',
-    'honeydew',
-    'mintcream',
-    'azure',
-    'aliceblue',
-    'ghostwhite',
-    'whitesmoke',
-    'seashell',
-    'beige',
-    'oldlace',
-    'floralwhite',
-    'ivory',
-    'antiquewhite',
-    'linen',
-    'lavenderblush',
-    'mistyrose',
-    'gainsboro',
-    'lightgray',
-    'silver',
-    'darkgray',
-    'gray',
-    'dimgray',
-    'lightslategray',
-    'slategray',
-    'darkslategray',
-    'black',
-    'cornsilk',
-    'blanchedalmond',
-    'bisque',
-    'navajowhite',
-    'wheat',
-    'burlywood',
-    'tan',
-    'rosybrown',
-    'sandybrown',
-    'goldenrod',
-    'peru',
-    'chocolate',
-    'saddlebrown',
-    'sienna',
-    'brown',
-    'maroon',
+    '255,160,122',
+    '250,128,114',
+    '233,150,122',
+    '240,128,128',
+    '205,92,92',
+    '220,20,60',
+    '178,34,34',
+    '255,0,0',
+    '139,0,0',
+    '255,127,80',
+    '255,99,71',
+    '255,69,0',
+    '255,215,0',
+    '255,165,0',
+    '255,140,0',
+    '255,255,224',
+    '255,250,205',
+    '250,250,210',
+    '255,239,213',
+    '255,228,181',
+    '255,218,185',
+    '238,232,170',
+    '240,230,140',
+    '189,183,107',
+    '255,255,0',
+    '124,252,0',
+    '127,255,0',
+    '50,205,50',
+    '0.255.0',
+    '34,139,34',
+    '0,128,0',
+    '0,100,0',
+    '173,255,47',
+    '154,205,50',
+    '0,255,127',
+    '0,250,154',
+    '144,238,144',
+    '152,251,152',
+    '143,188,143',
+    '60,179,113',
+    '46,139,87',
+    '128,128,0',
+    '85,107,47',
+    '107,142,35',
+    '224,255,255',
+    '0,255,255',
+    '0,255,255',
+    '127,255,212',
+    '102,205,170',
+    '175,238,238',
+    '64,224,208',
+    '72,209,204',
+    '0,206,209',
+    '32,178,170',
+    '95,158,160',
+    '0,139,139',
+    '0,128,128',
+    '176,224,230',
+    '173,216,230',
+    '135,206,250',
+    '135,206,235',
+    '0,191,255',
+    '176,196,222',
+    '30,144,255',
+    '100,149,237',
+    '70,130,180',
+    '65,105,225',
+    '0,0,255',
+    '0,0,205',
+    '0,0,139',
+    '0,0,128',
+    '25,25,112',
+    '123,104,238',
+    '106,90,205',
+    '72,61,139',
+    '230,230,250',
+    '216,191,216',
+    '221,160,221',
+    '238,130,238',
+    '218,112,214',
+    '255,0,255',
+    '255,0,255',
+    '186,85,211',
+    '147,112,219',
+    '138,43,226',
+    '148,0,211',
+    '153,50,204',
+    '139,0,139',
+    '128,0,128',
+    '75,0,130',
+    '255,192,203',
+    '255,182,193',
+    '255,105,180',
+    '255,20,147',
+    '219,112,147',
+    '199,21,133',
+    '255,255,255',
+    '255,250,250',
+    '240,255,240',
+    '245,255,250',
+    '240,255,255',
+    '240,248,255',
+    '248,248,255',
+    '245,245,245',
+    '255,245,238',
+    '245,245,220',
+    '253,245,230',
+    '255,250,240',
+    '255,255,240',
+    '250,235,215',
+    '250,240,230',
+    '255,240,245',
+    '255,228,225',
+    '220,220,220',
+    '211,211,211',
+    '192,192,192',
+    '169,169,169',
+    '128,128,128',
+    '105,105,105',
+    '119,136,153',
+    '112,128,144',
+    '47,79,79',
+    '0,0,0',
+    '255,248,220',
+    '255,235,205',
+    '255,228,196',
+    '255,222,173',
+    '245,222,179',
+    '222,184,135',
+    '210,180,140',
+    '188,143,143',
+    '244,164,96',
+    '218,165,32',
+    '205,133,63',
+    '210,105,30',
+    '139,69,19',
+    '160,82,45',
+    '165,42,42',
+    '128,0,0',
   ]
   const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   const lettersList = letters.split('')
@@ -167,12 +168,17 @@
     ctx.textAlign = 'center'
   }
 
+  function getColor(color, active) {
+    return `rgba(${color}, ${active ? 1 : 0.1})`
+  }
+
   function Link(start, end, from, to, colorFrom, colorTo) {
     this.rectSize = { width: 70, height: 40 }
     this.from = from
     this.to = to
     this.colorFrom = colorFrom
     this.colorTo = colorTo
+    this.includeInPath = true
 
     this.setCoords({ start, end })
   }
@@ -219,7 +225,7 @@
 
   Link.prototype.drawCursor = function (ctx) {
     ctx.beginPath()
-    ctx.fillStyle = this.colorFrom
+    ctx.fillStyle = getColor(this.colorFrom, this.includeInPath)
     ctx.fillRect(this.rectX, this.rectY, this.rectSize.width, this.rectSize.height)
   }
 
@@ -233,19 +239,28 @@
 
   Link.prototype.drawLine = function (ctx) {
     ctx.beginPath()
-    ctx.strokeStyle = this.colorFrom
+    ctx.strokeStyle = getColor(this.colorFrom, this.includeInPath)
     ctx.moveTo(this.startX, this.startY)
     ctx.lineTo(this.endX, this.endY)
     ctx.stroke()
+  }
+
+  Link.prototype.setIsIncludeInPath = function () {
+    this.includeInPath = true
+  }
+
+  Link.prototype.setIsNotIncludeInPath = function () {
+    this.includeInPath = false
   }
 
   function Circle(x, y, name) {
     this.x = x
     this.y = y
     this.name = name
-    this.radius = 30
+    this.radius = radius
     this.color = colors[getRandomNumber(0, colors.length - 1)]
     this.active = false
+    this.includeInPath = true
   }
 
   Circle.prototype.setCoords = function ({ x, y }) {
@@ -263,7 +278,7 @@
 
   Circle.prototype.drawCircle = function (ctx) {
     ctx.beginPath()
-    ctx.fillStyle = this.color
+    ctx.fillStyle = getColor(this.color, this.includeInPath)
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false)
     ctx.fill()
   }
@@ -286,6 +301,14 @@
 
   Circle.prototype.setInactive = function () {
     this.active = false
+  }
+
+  Circle.prototype.setIsIncludeInPath = function () {
+    this.includeInPath = true
+  }
+
+  Circle.prototype.setIsNotIncludeInPath = function () {
+    this.includeInPath = false
   }
 
   function onToggleContextMenu({ menu, x, y }, forceClose) {
@@ -556,10 +579,10 @@
       onToggleContextMenu({ menu: linkContext })
     })
 
-    findButton.addEventListener('click', function() {
+    findButton.addEventListener('click', function () {
       const data = {}
 
-      links.forEach(link => {
+      links.forEach((link) => {
         const { from, to, distance } = link
 
         if (!data[from]) {
@@ -569,17 +592,34 @@
         data[from][to] = distance
       })
 
+      links.forEach(link => link.setIsIncludeInPath())
+      circles.forEach(circle => circle.setIsIncludeInPath())
+
       const start = startInput.value.toUpperCase()
       const end = endInput.value.toUpperCase()
       const result = window.findPath(data, start, end)
 
       resultInput.innerHTML = result.join('→')
+
+      links.forEach((link) => {
+        const findIndex = result.findIndex(item => item === link.from)
+        if (!(result[findIndex] === link.from && result[findIndex + 1] === link.to)) {
+          link.setIsNotIncludeInPath()
+        }
+      })
+      circles.forEach((circle) => {
+        if (!result.includes(circle.name)) {
+          circle.setIsNotIncludeInPath()
+        }
+      })
+
+      draw(context, circles, links, width, height)
     })
 
     circles.push(
       new Circle(width / 2, height / 2, lettersList[0]),
       new Circle(width / 3, height / 3, lettersList[1]),
-      new Circle(width / 1.5, height / 4, lettersList[2]),
+      new Circle(width / 1.5, height / 4, lettersList[2])
     )
 
     links.push(
@@ -598,7 +638,7 @@
         circles[2].name,
         circles[1].color,
         circles[2].color
-      ),
+      )
     )
 
     draw(context, circles, links, width, height)
